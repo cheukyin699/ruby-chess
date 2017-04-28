@@ -26,6 +26,7 @@ class Move
       @piece = :queen
     else
       @type = :normal
+      #        PIECE            FROM                    KILL    TO              PROMO
       data = /(?<p>[RNBQK])?(?<f>[a-h1-8]|[a-h][1-8])?(?<x>x)?(?<t>[a-h][1-8])(?<promo>=[RNBQ])?/.match(s)
 
       if data.nil?

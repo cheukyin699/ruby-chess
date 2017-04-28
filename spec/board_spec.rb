@@ -10,4 +10,7 @@ describe Chessboard do
 
   describe '.valid?' do
   end
+
+  describe '.to_s' do
+  end
 end
