@@ -12,5 +12,27 @@ describe Chessboard do
   end
 
   describe '.to_s' do
+    let(:b) {Chessboard.new}
+    it 'outputs the expected for init for white' do
+      expect(b.to_s).to eq("♖♘♗♕♔♗♘♖
+♙♙♙♙♙♙♙♙
+........
+........
+........
+........
+♟♟♟♟♟♟♟♟
+♜♞♝♛♚♝♞♜")
+    end
+
+    it 'outputs the expected for init for black' do
+      expect(b.to_s :black).to eq("♜♞♝♛♚♝♞♜
+♟♟♟♟♟♟♟♟
+........
+........
+........
+........
+♙♙♙♙♙♙♙♙
+♖♘♗♕♔♗♘♖")
+    end
   end
 end

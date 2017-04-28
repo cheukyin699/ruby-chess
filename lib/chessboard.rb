@@ -1,6 +1,6 @@
 require './lib/player.rb'
 
-n_to_u = {
+$n_to_u = {
   0 => ".",
   1 => "♔",
   2 => "♕",
@@ -18,9 +18,8 @@ n_to_u = {
 
 class Chessboard
   def initialize
-    @white_player = Player.new(:white)
-    @black_player = Player.new(:black)
-    @board = Array.new(8, Array.new(8))
+    @board = Array.new(8)
+    @board.map! {|_| Array.new(8, 0)}
 
     initialize_board :white
     initialize_board :black
@@ -29,6 +28,7 @@ class Chessboard
   def initialize_board(side)
     i = side == :white ? 0 : 7
     add = side == :white ? 0 : 10
+    # Represent the board with unique numbers
     @board[i][0] = 3 + add
     @board[i][1] = 5 + add
     @board[i][2] = 4 + add
@@ -52,6 +52,12 @@ class Chessboard
     # TODO
   end
 
-  def to_s
+  def to_s(turn = :white)
+    s = @board.map {|r| r.map(&$n_to_u).join}.join("\n")
+    if turn == :black
+      @board.reverse.map {|r| r.map(&$n_to_u).join}.join("\n")
+    else
+      @board.map {|r| r.map(&$n_to_u).join}.join("\n")
+    end
   end
 end
