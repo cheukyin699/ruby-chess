@@ -16,6 +16,10 @@ $n_to_u = {
   16 => "♟"
 }
 
+def partial(k)
+  $n_to_u[k]
+end
+
 class Chessboard
   def initialize
     @board = Array.new(8)
@@ -53,11 +57,11 @@ class Chessboard
   end
 
   def to_s(turn = :white)
-    s = @board.map {|r| r.map(&$n_to_u).join}.join("\n")
+    s = @board.map {|r| r.map(partial).join}.join("\n")
     if turn == :black
-      @board.reverse.map {|r| r.map(&$n_to_u).join}.join("\n")
+      @board.reverse.map {|r| r.map(partial).join}.join("\n")
     else
-      @board.map {|r| r.map(&$n_to_u).join}.join("\n")
+      @board.map {|r| r.map(partial).join}.join("\n")
     end
   end
 end
