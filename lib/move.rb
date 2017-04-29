@@ -38,6 +38,11 @@ class Move
         @kill = not(data[:x].nil?)
         @promo = @@PieceMap[data[:promo][1]] unless data[:promo].nil?
 
+        # Promotional challenges
+        if not @promo.nil? and @to[1] != "8"
+          raise "Invalid Move"
+        end
+
         @type = :promo unless @promo.nil?
       end
     end

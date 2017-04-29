@@ -24,10 +24,6 @@ $n_to_u = {
   16 => "♟"
 }
 
-def partial(k)
-  $n_to_u[k]
-end
-
 class Chessboard
   def initialize
     @board = Array.new(8)
@@ -61,6 +57,50 @@ class Chessboard
   end
 
   def valid?(move)
+    # move has already been initialized by the game; you don't need to do sanity
+    # checks. Just do some logic checks and check if the move allows the king to
+    # be in check.
+    case move.piece
+    when :pawn
+      valid_pawn? move and king_danger? move
+    when :rook
+      valid_rook? move and king_danger? move
+    when :knight
+      valid_knight? move and king_danger? move
+    when :bishop
+      valid_bishop? move and king_danger? move
+    when :queen
+      valid_queen? move and king_danger? move
+    when :king
+      valid_king? move and king_danger? move
+    else
+      raise "Invalid move"
+    end
+  end
+
+  def valid_pawn?(move)
+    if move.kill and move.from.length == 1 and "abcdefgh".include? move.from
+      # You have just killed something
+    end
+  end
+
+  def valid_rook?(move)
+    # TODO
+  end
+
+  def valid_knight?(move)
+    # TODO
+  end
+
+  def valid_bishop?(move)
+    # TODO
+  end
+
+  def valid_queen?(move)
+    # TODO
+  end
+
+  def valid_king?(move)
     # TODO
   end
 
@@ -71,11 +111,11 @@ class Chessboard
   end
 
   def to_s(turn = :white)
-    s = @board.map {|r| r.map {|i| partial(i)}.join}.join("\n")
+    s = @board.map {|r| r.map {|i| $n_to_u[i]}.join}.join("\n")
     if turn == :black
-      @board.reverse.map {|r| r.map {|i| partial(i)}.join}.join("\n")
+      @board.reverse.map {|r| r.map {|i| $n_to_u[i]}.join}.join("\n")
     else
-      @board.map {|r| r.map {|i| partial(i)}.join}.join("\n")
+      @board.map {|r| r.map {|i| $n_to_u[i]}.join}.join("\n")
     end
   end
 end
