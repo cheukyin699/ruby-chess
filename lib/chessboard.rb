@@ -1,4 +1,12 @@
-require './lib/player.rb'
+=begin
+The Chessboard class
+
+Handles everything from move validation (beyond the mere sanity tests that some
+OTHER classes provide), to piece tracking. Because of it's nature, it is
+(as of writing) impossible to find actual legal moves.
+
+Also can save entire game onto some file via command. At least, it handles it.
+=end
 
 $n_to_u = {
   0 => ".",
@@ -56,12 +64,18 @@ class Chessboard
     # TODO
   end
 
+  def save(fn)
+  end
+
+  def open(fn)
+  end
+
   def to_s(turn = :white)
-    s = @board.map {|r| r.map(partial).join}.join("\n")
+    s = @board.map {|r| r.map {|i| partial(i)}.join}.join("\n")
     if turn == :black
-      @board.reverse.map {|r| r.map(partial).join}.join("\n")
+      @board.reverse.map {|r| r.map {|i| partial(i)}.join}.join("\n")
     else
-      @board.map {|r| r.map(partial).join}.join("\n")
+      @board.map {|r| r.map {|i| partial(i)}.join}.join("\n")
     end
   end
 end
